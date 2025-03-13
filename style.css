@@ -1,0 +1,58 @@
+@import url("https://use.typekit.net/lby8pwm.css");
+            
+body {
+        background-image: url('dnd\ bg.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+}
+           
+@font-face {
+                font-family: otherCoolFont;
+                src: url(Novecentosanswide-Light.otf);
+}
+
+h1 {
+        color:#ebebeb;
+        font-family:"alfarn";
+        font-size: 225px;
+        text-align: center;
+        margin-top: -7px;            
+}
+            
+h2 {
+        color:#ebebeb;
+        font-family:otherCoolFont;
+        font-size: 175px;
+        text-align: center;
+        margin-top: -225px;  
+}
+
+h3 {
+        color:#ebebeb;
+        font-family:'Times New Roman', Times, serif;
+        font-size: 50px;
+        text-align: center;
+}
+            
+.file-upload {
+                display: none;
+}
+
+.custom-button {
+                    padding: 10px 20px;
+                    background-color: #c20000;
+                    color: white;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 30px;
+                    text-align: center;
+}
+
+form {
+        text-align: center;
+}
+input {
+    font-size: 25px;
+    margin: 30px;
+}
