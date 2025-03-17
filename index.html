@@ -15,5 +15,24 @@
             </label>
             <input type="submit" value="Upload">
         </form>
+        <h4 id="previewLabel" style="display: none;"> Preview:</h4>
+        <img id="mapPreview" style="max-width: px; display: none;">
+        
+        <!-- inline script, will move to .js after testing -Justin -->
+        <script defer>
+            const fileInput = document.getElementById("fileUpload");
+            const mapPreview = document.getElementById("mapPreview");
+            const previewLabel = document.getElementById("previewLabel")
+
+            fileInput.addEventListener("change", function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const imageURL = URL.createObjectURL(file);
+                    mapPreview.src = imageURL;
+                    mapPreview.style.display = "block";
+                    previewLabel.style.display = "block";
+                }
+            });
+        </Script>
     </body>
 </html>
