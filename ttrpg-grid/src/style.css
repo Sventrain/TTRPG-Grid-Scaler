@@ -1,9 +1,10 @@
 @import url("https://use.typekit.net/lby8pwm.css");
             
 body {
-        background-image: url('dnd\ bg.png');
+        background-image: url('dnd-bg.png');
         background-repeat: no-repeat;
         background-size: cover;
+        background-position: center;
 }
            
 @font-face {
