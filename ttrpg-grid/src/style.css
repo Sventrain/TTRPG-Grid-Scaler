@@ -5,6 +5,7 @@ body {
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
+        background-attachment: fixed;
 }
            
 @font-face {
@@ -15,7 +16,7 @@ body {
 h1 {
         color:#ebebeb;
         font-family:"alfarn";
-        font-size: 225px;
+        font-size: 50px;
         text-align: center;
         margin-top: -7px;            
 }
@@ -23,7 +24,7 @@ h1 {
 h2 {
         color:#ebebeb;
         font-family:otherCoolFont;
-        font-size: 175px;
+        font-size: 50px;
         text-align: center;
         margin-top: -225px;  
 }
