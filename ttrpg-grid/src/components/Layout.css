@@ -1,8 +1,26 @@
+@font-face {
+    font-family: otherCoolFont;
+    src: url(Novecentosanswide-Light.otf);
+}
+
+@import url("https://use.typekit.net/lby8pwm.css");
+            
+body {
+        background-image: url('dnd-bg.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+}
+
+
 .app-container {
     height: 100vh;
     display: flex;
     flex-direction: column;
     font-family: sans-serif;
+    text-align: center;
+    margin: 0px 600px;
 }
 
 .header {
@@ -18,11 +36,41 @@
     flex: 1;
 }
 
+.title-main {
+    color:#ebebeb;
+    font-family:"alfarn";
+    font-size: 150px;
+    text-align: center;
+    position:fixed;
+    top:0;
+    width:45%;     
+    z-index: 5;   
+}
+        
+.title-sub {
+    color:#ebebeb;
+    font-family:otherCoolFont;
+    font-size: 125px;
+    text-align: center; 
+    margin-top: 75px;
+    margin-left: 205px;
+    position:fixed;
+    z-index: 4;
+}
+
+.title-tag {
+    color:#ebebeb;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 50px;
+    text-align: center;
+}
+
 .sidebar {
     width: 200px;
-    background-color: transparent;
     padding: 1rem;
-    border-right: 1px solid #ccc;
+    margin-top: 150px;
+    position:fixed;
+    z-index: 3;
 }
 
 .sidebar h3 {
@@ -36,24 +84,19 @@
 
 .sidebar li {
     margin-bottom: 0.5rem;
+    color:#ebebeb;
 }
 
-.main-area { 
-    flex: 1;
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
+.main-area {
+    z-index: 0;
+    margin-top: 240px;
+    margin-left: 230px;
+    width: 1000px;
+    height: 900px;
 }
 
-.custom-button {
-    padding: 10px 20px;
-    background-color: #c20000;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 30px;
-    text-align: center;
+.picture {
+    height: 100%;
+    width: 100%;
+    object-fit:contain;
 }
