@@ -16,15 +16,16 @@ export default function ImageUploader({ onImageSelected }) {
 
     return (
         <div style={{ textAlign: "center", padding: "2rem"}}>
-            <h2>Upload Map to Add Scaling</h2>
-            <input type="file" accept="image/*" onChange={handleFileChange} />
+            <input type="file"  className="hidden" id="fileUpload" accept="image/*"/>
+            <label for="fileUpload" className="custom-button"> Upload</label>
             {previewUrl && (
-                <>
+                <>8
                     <h3>Preview</h3>
                     <img
                         src={previewUrl}
                         alt="Map Preview"
-                        style={{ maxWidth: "500px", marginTop: "1rem"}}
+                        className="image-location"
+                        style={{ maxWidth: "1000px", maxHeight: "1000px"}}
                     />
                 </>
             )}
