@@ -1,34 +1,38 @@
 import "./layout.css";
-import ImageUploader from "./ImageUploader";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect, useRef } from "react";
+import Konva from 'konva';
+import { Stage, Layer, Rect, Circle } from 'react-konva';
 
 export default function Layout({ children }) {
-    const [previewImageSrc, setPreviewImageSrc] = useState("");
 
-    const handleCreateBase64 = useCallback(async (e) => {
-        const file = e.target.files[0];
-        const base64 = await convertToBase64(file);
-        setPreviewImageSrc(base64);
-        e.target.value = "";
-    }, []);
-
-    const convertToBase64 = (file) => {
-        return new Promise((resolve, reject) => {
-            const fileReader = new FileReader();
-            if(!file) {
-                alert("Please select an image");
-            } else {
-                fileReader.readAsDataURL(file);
-                fileReader.onload = () => {
-                    resolve(fileReader.result);
-                };
-            }
-            fileReader.onerror = (error) => {
-                reject(error);
-            };
-        });
+    const width = 1000;
+    const height = 900;
+    
+    // Handler to reset background position on stage drag
+    const handleDragMove = () => {
+      if (backgroundRef.current) {
+        backgroundRef.current.absolutePosition({ x: 0, y: 0 });
+      }
     };
-
+  
+    const [image, setImage] = useState(null);
+    const stageRef = useRef(null);
+  
+    const handleImageUpload = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new window.Image();
+          img.onload = () => {
+            setImage(img);
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+  
     return (
         <div className="app-container">
             <header className="header">
@@ -40,7 +44,7 @@ export default function Layout({ children }) {
                     <h3 className="side-title">MENU</h3>
                     <ul>
                         <li>
-                            <input type="file"  className="hidden" id="fileUpload" accept="image/*" onChange={handleCreateBase64}/>
+                            <input type="file"  className="hidden" id="fileUpload" accept="image/*" onChange={handleImageUpload}/>
                             <label for="fileUpload" className="custom-button"> Upload
                             </label>
                         </li>
@@ -49,8 +53,36 @@ export default function Layout({ children }) {
                         <li>...</li>
                     </ul>
                 </aside>
-                <main className="main-area">{children} 
-                    <img src={previewImageSrc} className="picture"></img>
+                    <main className="main-area">{children}
+                        <Stage 
+                            width={width} 
+                            height={height}
+                            ref={stageRef}
+                            onDragMove={handleDragMove}
+                        >
+        
+                            <Layer>
+                                {image && (
+                                    <Rect
+                                        width={width}
+                                        height={height}
+                                        fillPatternImage={image}
+                                        fillPatternScaleX={width/image.width}
+                                        fillPatternScaleY={height/image.height}
+                                    />
+                                )}
+        
+                                {/* Demo shape */}
+                                    <Circle
+                                        x={width / 2}
+                                        y={height / 2}
+                                        radius={100}
+                                        draggable
+                                        fill="red"
+                                    />
+                            </Layer>
+                    </Stage>
+
                 </main>
             </div>
         </div>
