@@ -1,9 +1,8 @@
+@import url("https://use.typekit.net/lby8pwm.css");
 @font-face {
     font-family: otherCoolFont;
     src: url(Novecentosanswide-Light.otf);
 }
-
-@import url("https://use.typekit.net/lby8pwm.css");
             
 body {
         background-image: url('dnd-bg.png');
@@ -85,6 +84,14 @@ body {
 .sidebar li {
     margin-bottom: 0.5rem;
     color:#ebebeb;
+}
+
+.stage {
+    z-index: 0;
+    margin-top: 240px;
+    margin-left: 230px;
+    width: 1000px;
+    height: 900px;
 }
 
 .main-area {
