@@ -10,17 +10,10 @@ export default function Layout({ children }) {
     const [startPos, setStartPos] = useState({ x: 0, y: 0 });
     const [previewSquare, setPreviewSquare] = useState(null);
     const [tiledSquares, setTiledSquares] = useState([]);
-
-    // Handler to reset background position on stage drag
-    const handleDragMove = () => {
-      if (backgroundRef.current) {
-        backgroundRef.current.absolutePosition({ x: 0, y: 0 });
-      }
-    };
-  
     const [image, setImage] = useState(null);
     const stageRef = useRef(null);
-  
+    
+    //Handler for image upload. 
     const handleImageUpload = (event) => {
       const file = event.target.files[0];
       if (file) {
@@ -33,6 +26,13 @@ export default function Layout({ children }) {
           img.src = e.target.result;
         };
         reader.readAsDataURL(file);
+      }
+    };
+
+    // Handler to reset background position on stage drag
+    const handleDragMove = () => {
+      if (backgroundRef.current) {
+        backgroundRef.current.absolutePosition({ x: 0, y: 0 });
       }
     };
   
@@ -94,7 +94,7 @@ export default function Layout({ children }) {
     const handleExport = () => {
         const uri = stageRef.current.toDataURL();
         const link = document.createElement('a');
-        link.download = 'tiled-squares.png';
+        link.download = 'TTRPGScaledMap.png';
         link.href = uri;
         document.body.appendChild(link);
         link.click();
@@ -116,9 +116,9 @@ export default function Layout({ children }) {
                             <label for="fileUpload" className="custom-button"> Upload
                             </label>
                         </li>
-                        <li>Save</li>
-                        <li>Option 1</li>
-                        <li>...</li>
+                        <li>
+                            <button onClick={handleExport} className="custom-button" margin-top = "5px" > Save </button>
+                        </li>
                     </ul>
                 </aside>
                     <main className="main-area">{children}
@@ -151,8 +151,7 @@ export default function Layout({ children }) {
                                         width={previewSquare.size}
                                         height={previewSquare.size}
                                         stroke="white"
-                                        dash={[4, 2]}
-          />
+                                    />
                                 )}
 
                                 {/* Final tiled pattern */}
@@ -166,14 +165,9 @@ export default function Layout({ children }) {
                                         stroke="white"
                                         strokeWidth={1}
                                     />
-                            ))}
+                                ))}
                             </Layer>
                     </Stage>
-
-                          {/* ✅ Export Button */}
-                        <button onClick={handleExport} style={{ marginTop: '10px' }}>
-                        Export as PNG
-                        </button>
                 </main>
             </div>
         </div>
