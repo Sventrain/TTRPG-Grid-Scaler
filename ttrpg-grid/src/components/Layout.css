@@ -14,7 +14,7 @@ html, body {
 }
 
 body {
-        background-image: url('dnd-bg.png');
+        background-image: url('/dnd-bg.png');
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
@@ -31,11 +31,13 @@ body {
 }
 
 .header {
-    background-color: transparent;
-    color: white;
-    font-size: 2rem;
-    text-align: center;
-    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 100%;
+    padding-left: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .content {
@@ -48,26 +50,32 @@ body {
 .title-main {
     color:#ebebeb;
     font-family:"alfarn";
-    font-size: clamp(2.5rem, 6vw, 8rem);
+    font-size: clamp(2rem, 5vw, 3.5rem);
     text-align: center;
+    max-width: clamp(160px, 12vw, 240px);
+    word-wrap: break-word;
     position:fixed;
     top:2vh;
     left: 2vw;
     width:auto;     
     z-index: 5;  
     margin: 0; 
+    white-space: nowrap;
 }
         
 .title-sub {
     color:#ebebeb;
     font-family:otherCoolFont;
-    font-size: clamp(1.5rem, 5vw, 6rem);
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    max-width: clamp(160px, 12vw, 240px);
+    word-wrap: break-word;
     text-align: center; 
     top: 10vh;
     left: 2vw;
     position:fixed;
     z-index: 4;
     margin: 0;
+    white-space: nowrap;
 }
 
 .title-tag {
@@ -133,4 +141,15 @@ body {
     max-width: 100%;
     max-height: 80vh;
     height: auto;
-  }
+}
+
+.canvas-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.canvas-inner {
+    margin-left: clamp(160px, 12vw, 240px); /* match sidebar offset */
+}

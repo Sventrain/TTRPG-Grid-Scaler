@@ -81,13 +81,13 @@ export default function Layout({ children }) {
       const squares = [];
       
       //Calculate number of squares in each direction and rounds up to nearest integer. 
-      const offsetX = (canvasSize.width - image.width * scale) / 2;
-      const offsetY = (canvasSize.height - image.height * scale) / 2;
+      const offsetX = 0;
+      const offsetY = 0;
 
       const leftSquares = Math.ceil((x - offsetX) / size);
-      const rightSquares = Math.ceil((offsetX + image.width * scale - (x + size)) / size);
+      const rightSquares = Math.ceil((scaledWidth - (x + size)) / size);
       const upSquares = Math.ceil((y - offsetY) / size);
-      const downSquares = Math.ceil((offsetY + image.height * scale - (y + size)) / size);
+      const downSquares = Math.ceil((scaledHeight - (y + size)) / size);
       
       //Nested for loop, first determines vertical distance then horizontal distance. Then pushes square in array. 
       for (let row = -upSquares; row <= downSquares; row++) {
@@ -147,20 +147,26 @@ export default function Layout({ children }) {
     }, []);
 
     let scale = 1;
+    let scaledWidth = 0;
+    let scaledHeight = 0;
+
     if (image) {
       scale = Math.min(
-        canvasSize.width / image.width,
-        canvasSize.height / image.height
+        (canvasSize.width * 0.85) / image.width,
+        (canvasSize.height * 0.85) / image.height
       );
+      scaledWidth = image.width * scale;
+      scaledHeight = image.height * scale;
+
     }
 
     return (
         <div className="app-container">
             {/*Creating header for the site.  */}
-            <header className="header">
+            <div className="header">
                 <h1 className="title-main">TTRPG</h1>
                 <h2 className="title-sub">Grid Scaler</h2>
-            </header>
+            </div>
             {/*Creating the sidebar with the upload and save button. */}
             <div className="content">
                 <aside className="sidebar">
@@ -177,53 +183,55 @@ export default function Layout({ children }) {
                     </ul>
                 </aside>
                     <main className="main-area">{children}
-                      <div style={{ minWidth: canvasSize.width }}>
+                      <div className="canvas-wrapper">
+                        <div className="canvas-inner">
                         {/*Creating the main stage for canvas. Setting up width, height and assigning variables for mouse clicks and movement. */}
-                        <Stage 
-                            width={canvasSize.width} 
-                            height={canvasSize.height}
-                            ref={stageRef}
-                            onMouseDown={handleMouseDown}
-                            onMouseMove={handleMouseMove}
-                            onMouseUp={handleMouseUp}
-                        >
-                            {/*Adding layer to canvas. First layer will be users map and will act as a background.  */}
-                            <Layer>
-                                {image && (
-                                    <Rect
-                                      x={(canvasSize.width - image.width * scale) / 2}
-                                      y={(canvasSize.height - image.height * scale) / 2}
-                                      width={image.width * scale}
-                                      height={image.height * scale}
-                                      fillPatternImage={image}
-                                      fillPatternScaleX={scale}
-                                      fillPatternScaleY={scale}
-                                    />
-                                )}
+                          <Stage 
+                              width={scaledWidth} 
+                              height={scaledHeight}
+                              ref={stageRef}
+                              onMouseDown={handleMouseDown}
+                              onMouseMove={handleMouseMove}
+                              onMouseUp={handleMouseUp}
+                          >
+                              {/*Adding layer to canvas. First layer will be users map and will act as a background.  */}
+                              <Layer>
+                                  {image && (
+                                      <Rect
+                                        x={0}
+                                        y={0}
+                                        width={scaledWidth}
+                                        height={scaledHeight}
+                                        fillPatternImage={image}
+                                        fillPatternScaleX={scale}
+                                        fillPatternScaleY={scale}
+                                      />
+                                  )}
 
-                                {/* This layer will create the preview for the square. Allows user to know where placement will be.*/}
-                                {previewSquare && (
-                                    <Rect
-                                        x={previewSquare.x}
-                                        y={previewSquare.y}
-                                        width={previewSquare.size}
-                                        height={previewSquare.size}
-                                        stroke="white"
-                                    />
-                                )}
+                                  {/* This layer will create the preview for the square. Allows user to know where placement will be.*/}
+                                  {previewSquare && (
+                                      <Rect
+                                          x={previewSquare.x}
+                                          y={previewSquare.y}
+                                          width={previewSquare.size}
+                                          height={previewSquare.size}
+                                          stroke="white"
+                                      />
+                                  )}
 
-                                {/* Final layer will add the square grid based on users location */}
-                                {gridSquares.map(square => (
-                                    <Rect
-                                        x={square.x}
-                                        y={square.y}
-                                        width={square.size}
-                                        height={square.size}
-                                        stroke="white"
-                                    />
-                                ))}
-                            </Layer>
-                        </Stage>
+                                  {/* Final layer will add the square grid based on users location */}
+                                  {gridSquares.map(square => (
+                                      <Rect
+                                          x={square.x}
+                                          y={square.y}
+                                          width={square.size}
+                                          height={square.size}
+                                          stroke="white"
+                                      />
+                                  ))}
+                              </Layer>
+                          </Stage>
+                        </div>
                       </div>  
                 </main>
             </div>
