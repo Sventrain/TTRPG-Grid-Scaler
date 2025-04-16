@@ -5,6 +5,14 @@
     src: url(Novecentosanswide-Light.otf);
 }
             
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
 body {
         background-image: url('dnd-bg.png');
         background-repeat: no-repeat;
@@ -20,7 +28,6 @@ body {
     flex-direction: column;
     font-family: sans-serif;
     text-align: center;
-    margin: 0px 600px;
 }
 
 .header {
@@ -33,29 +40,34 @@ body {
 
 .content {
     display: flex;
-    flex: 1;
+    flex-direction: row;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .title-main {
     color:#ebebeb;
     font-family:"alfarn";
-    font-size: 150px;
+    font-size: clamp(2.5rem, 6vw, 8rem);
     text-align: center;
     position:fixed;
-    top:0;
-    width:45%;     
-    z-index: 5;   
+    top:2vh;
+    left: 2vw;
+    width:auto;     
+    z-index: 5;  
+    margin: 0; 
 }
         
 .title-sub {
     color:#ebebeb;
     font-family:otherCoolFont;
-    font-size: 125px;
+    font-size: clamp(1.5rem, 5vw, 6rem);
     text-align: center; 
-    margin-top: 75px;
-    margin-left: 205px;
+    top: 10vh;
+    left: 2vw;
     position:fixed;
     z-index: 4;
+    margin: 0;
 }
 
 .title-tag {
@@ -66,11 +78,18 @@ body {
 }
 
 .sidebar {
-    width: 200px;
+    position: fixed;
+    top: 25vh;
+    left: 2vw;
+    width: clamp(160px, 12vw, 240px);
     padding: 1rem;
-    margin-top: 150px;
-    position:fixed;
+    background-color: rgba(0, 0, 0, 0.4); /* optional background for legibility */
+    border-radius: 12px;
     z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
 .sidebar h3 {
@@ -87,18 +106,31 @@ body {
     color:#ebebeb;
 }
 
-.stage {
+/*.stage {
     z-index: 0;
     margin-top: 240px;
     margin-left: 230px;
     width: 1000px;
     height: 900px;
-}
+}*/
 
 .main-area {
-    z-index: 0;
-    margin-top: 240px;
-    margin-left: 230px;
-    width: 1000px;
-    height: 900px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding: 10vh 2vw; /* top/bottom + slight side spacing */
+    padding-left: clamp(160px, 12vw, 240px); /* keep offset for sidebar */
+    box-sizing: border-box;
 }
+
+.main-area canvas {
+    z-index: 0;
+    position: relative;
+    max-width: 100%;
+    max-height: 80vh;
+    height: auto;
+  }

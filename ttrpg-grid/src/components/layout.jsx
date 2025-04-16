@@ -1,6 +1,6 @@
 //Importing outside files and initializing react and react-konva
 import "./layout.css";
-import React, {useState, useRef} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import { Stage, Layer, Rect} from 'react-konva';
 
 export default function Layout({ children }) {
@@ -14,7 +14,8 @@ export default function Layout({ children }) {
     const [startPos, setStartPos] = useState({ x: 0, y: 0 });
     const [previewSquare, setPreviewSquare] = useState(null);
     const [gridSquares, setGridSquares] = useState([]);
-    
+    const [canvasSize, setCanvasSize] = useState({ width: window.innerWidth, height: window.innerHeight });
+     
     //Process to upload an image. This will grab the first image selected by a user and convert to base64 data url.
     //This allows us to use the image as a local source and set img variable. 
     const handleImageUpload = (event) => {
@@ -25,6 +26,7 @@ export default function Layout({ children }) {
           const img = new window.Image();
           img.onload = () => {
             setImage(img);
+            setCanvasSize({ width: window.innerWidth, height: window.innerHeight });
           };
           img.src = e.target.result;
         };
@@ -79,10 +81,13 @@ export default function Layout({ children }) {
       const squares = [];
       
       //Calculate number of squares in each direction and rounds up to nearest integer. 
-      const leftSquares = Math.ceil(x / size);
-      const rightSquares = Math.ceil((width - x - size) / size);
-      const upSquares = Math.ceil(y / size);
-      const downSquares = Math.ceil((height - y - size) / size);
+      const offsetX = (canvasSize.width - image.width * scale) / 2;
+      const offsetY = (canvasSize.height - image.height * scale) / 2;
+
+      const leftSquares = Math.ceil((x - offsetX) / size);
+      const rightSquares = Math.ceil((offsetX + image.width * scale - (x + size)) / size);
+      const upSquares = Math.ceil((y - offsetY) / size);
+      const downSquares = Math.ceil((offsetY + image.height * scale - (y + size)) / size);
       
       //Nested for loop, first determines vertical distance then horizontal distance. Then pushes square in array. 
       for (let row = -upSquares; row <= downSquares; row++) {
@@ -101,7 +106,26 @@ export default function Layout({ children }) {
     //Process to create a button that will allow the user to export the image. This will create a screenshot, a temp anchor, 
     //name the file for the user, and create a data url for the user to click. 
     const handleExport = () => {
-      const uri = stageRef.current.toDataURL();
+      if (!image) return;
+    
+      const scale = Math.min(
+        canvasSize.width / image.width,
+        canvasSize.height / image.height
+      );
+    
+      const x = (canvasSize.width - image.width * scale) / 2;
+      const y = (canvasSize.height - image.height * scale) / 2;
+      const width = image.width * scale;
+      const height = image.height * scale;
+    
+      const uri = stageRef.current.toDataURL({
+        x,
+        y,
+        width,
+        height,
+        pixelRatio: 2 // optional, for higher quality
+      });
+    
       const link = document.createElement('a');
       link.download = 'TTRPGScaledMap.png';
       link.href = uri;
@@ -109,6 +133,26 @@ export default function Layout({ children }) {
       link.click();
       document.body.removeChild(link);
     };
+
+    useEffect(() => {
+      const updateCanvasSize = () => {
+        setCanvasSize({
+          width: window.innerWidth,
+          height: window.innerHeight
+        });
+      };
+      window.addEventListener("resize", updateCanvasSize);
+      updateCanvasSize();
+      return () => window.removeEventListener("resize", updateCanvasSize);
+    }, []);
+
+    let scale = 1;
+    if (image) {
+      scale = Math.min(
+        canvasSize.width / image.width,
+        canvasSize.height / image.height
+      );
+    }
 
     return (
         <div className="app-container">
@@ -133,10 +177,11 @@ export default function Layout({ children }) {
                     </ul>
                 </aside>
                     <main className="main-area">{children}
+                      <div style={{ minWidth: canvasSize.width }}>
                         {/*Creating the main stage for canvas. Setting up width, height and assigning variables for mouse clicks and movement. */}
                         <Stage 
-                            width={width} 
-                            height={height}
+                            width={canvasSize.width} 
+                            height={canvasSize.height}
                             ref={stageRef}
                             onMouseDown={handleMouseDown}
                             onMouseMove={handleMouseMove}
@@ -146,11 +191,13 @@ export default function Layout({ children }) {
                             <Layer>
                                 {image && (
                                     <Rect
-                                        width={width}
-                                        height={height}
-                                        fillPatternImage={image}
-                                        fillPatternScaleX={width/image.width}
-                                        fillPatternScaleY={height/image.height}
+                                      x={(canvasSize.width - image.width * scale) / 2}
+                                      y={(canvasSize.height - image.height * scale) / 2}
+                                      width={image.width * scale}
+                                      height={image.height * scale}
+                                      fillPatternImage={image}
+                                      fillPatternScaleX={scale}
+                                      fillPatternScaleY={scale}
                                     />
                                 )}
 
@@ -176,7 +223,8 @@ export default function Layout({ children }) {
                                     />
                                 ))}
                             </Layer>
-                    </Stage>
+                        </Stage>
+                      </div>  
                 </main>
             </div>
         </div>
