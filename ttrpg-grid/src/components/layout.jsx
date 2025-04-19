@@ -15,6 +15,8 @@ export default function Layout({ children }) {
     const [previewSquare, setPreviewSquare] = useState(null);
     const [gridSquares, setGridSquares] = useState([]);
     const [canvasSize, setCanvasSize] = useState({ width: window.innerWidth, height: window.innerHeight });
+    const [strokeWidth, setStrokeWidth] = useState(1);
+    const [squareStrokeColor, setSquareStrokeColor] = useState('white');
      
     //Process to upload an image. This will grab the first image selected by a user and convert to base64 data url.
     //This allows us to use the image as a local source and set img variable. 
@@ -180,7 +182,15 @@ export default function Layout({ children }) {
                         <li>
                             <button onClick={handleExport} className="custom-button" margin-top = "5px" > Save </button>
                         </li>
-                    </ul>
+                        <li>
+                            <label className="slider-label">Stroke Thickness:</label>
+                            <input type="range" min="1" max="10" value={strokeWidth} onChange={(e) => setStrokeWidth(Number(e.target.value))}/>
+                        </li>
+                        <li>
+                            <label className="color-label">Stroke Color:</label>
+                            <input type="color" value={squareStrokeColor} onChange={(e) => setSquareStrokeColor(e.target.value)} />
+                        </li>
+                      </ul>
                 </aside>
                     <main className="main-area">{children}
                       <div className="canvas-wrapper">
@@ -215,7 +225,8 @@ export default function Layout({ children }) {
                                           y={previewSquare.y}
                                           width={previewSquare.size}
                                           height={previewSquare.size}
-                                          stroke="white"
+                                          strokeWidth={strokeWidth}
+                                          stroke={squareStrokeColor}
                                       />
                                   )}
 
@@ -226,7 +237,8 @@ export default function Layout({ children }) {
                                           y={square.y}
                                           width={square.size}
                                           height={square.size}
-                                          stroke="white"
+                                          strokeWidth={strokeWidth}
+                                          stroke={squareStrokeColor}
                                       />
                                   ))}
                               </Layer>
