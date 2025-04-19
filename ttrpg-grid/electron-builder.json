@@ -1,0 +1,23 @@
+{
+  "extends": null,
+  "appId": "com.example.ttrpg-grid",
+  "productName": "TTRPG Grid Scaler",
+  "directories": {
+    "buildResources": "assets",
+    "output": "dist"
+  },
+  "files": [
+    "build/**/*",           
+    "electron/**/*",
+    "dist/**/*"           
+  ],
+  "asar": false,
+  "win": {
+    "target": "nsis"
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": true,
+    "allowToChangeInstallationDirectory": true
+  }
+}

@@ -3,7 +3,8 @@ h1 {
         font-family:"alfarn";
         font-size: 50px;
         text-align: center;
-        margin-top: -7px;            
+        margin-top: -7px;     
+        position: fixed       
 }
             
 h2 {
@@ -18,6 +19,13 @@ h3 {
         color:#ebebeb;
         font-family:'Times New Roman', Times, serif;
         font-size: 50px;
+        text-align: center;
+}
+
+h4 {
+        color:#ebebeb;
+        font-family:'Times New Roman', Times, serif;
+        font-size: 30px;
         text-align: center;
 }
 
