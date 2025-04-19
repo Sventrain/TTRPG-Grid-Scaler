@@ -173,6 +173,7 @@ export default function Layout({ children }) {
             <div className="content">
                 <aside className="sidebar">
                     <h3 className="side-title">MENU</h3>
+                    <h4>Upload map. Click and drag to create grid.</h4>
                     <ul>
                         <li>
                             <input type="file"  className="hidden" id="fileUpload" accept="image/*" onChange={handleImageUpload}/>
