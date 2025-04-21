@@ -17,14 +17,14 @@ h2 {
 h3 {
         color:#ebebeb;
         font-family:'Times New Roman', Times, serif;
-        font-size: 50px;
+        font-size: 30px;
         text-align: center;
 }
 
 h4 {
         color:#ebebeb;
         font-family:'Times New Roman', Times, serif;
-        font-size: 30px;
+        font-size: 16px;
         text-align: center;
 }
 
@@ -34,7 +34,7 @@ h4 {
                     color: white;
                     border-radius: 20px;
                     cursor: pointer;
-                    font-size: 30px;
+                    font-size: 20px;
                     text-align: center;
                     margin-top: 10px;
 }

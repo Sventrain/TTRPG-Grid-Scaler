@@ -184,11 +184,11 @@ export default function Layout({ children }) {
                             <button onClick={handleExport} className="custom-button" margin-top = "5px" > Save </button>
                         </li>
                         <li>
-                            <label className="slider-label">Stroke Thickness:</label>
+                            <label className="slider-label">Grid Thickness:</label>
                             <input type="range" min="1" max="10" value={strokeWidth} onChange={(e) => setStrokeWidth(Number(e.target.value))}/>
                         </li>
                         <li>
-                            <label className="color-label">Stroke Color:</label>
+                            <label className="color-label">Grid Color:</label>
                             <input type="color" value={squareStrokeColor} onChange={(e) => setSquareStrokeColor(e.target.value)} />
                         </li>
                       </ul>
