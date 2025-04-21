@@ -4,10 +4,7 @@ import React, {useState, useRef, useEffect} from "react";
 import { Stage, Layer, Rect} from 'react-konva';
 
 export default function Layout({ children }) {
-
-    //Initializing variables 
-    const width = 1000;
-    const height = 900;
+    // Reference and state initialization.
     const stageRef = useRef(null);
     const [image, setImage] = useState(null);
     const [isDrawing, setIsDrawing] = useState(false);
@@ -136,6 +133,7 @@ export default function Layout({ children }) {
       document.body.removeChild(link);
     };
 
+    // Adjust canvas size on window resize
     useEffect(() => {
       const updateCanvasSize = () => {
         setCanvasSize({

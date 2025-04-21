@@ -114,14 +114,6 @@ body {
     color:#ebebeb;
 }
 
-/*.stage {
-    z-index: 0;
-    margin-top: 240px;
-    margin-left: 230px;
-    width: 1000px;
-    height: 900px;
-}*/
-
 .main-area {
     flex: 1;
     display: flex;
