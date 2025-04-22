@@ -4,13 +4,18 @@ Welcome to the TTRPG Grid Scaler!
 # Purpose 
 The purpose of this program is to overlay a customizable grid scale over any map, specifically DnD maps. This program was built using React and Konva, these tools helped with creating and aligning the grid.
 
+# System Requirements
+
+Windows 10 or higher
+Node.js & npm (for development)
+Internet connection (only for initial installation)
+
 # Features
 Uploading and preview maps before and after grid.
 Drawing any size square to define the grid size. 
 Tiles are automatically created and shaped to map size. 
 Stroke thickness and color can be selected. 
 Export of final map. 
-
 
 # Installation
 Install and IDE like Visual Studio
@@ -41,3 +46,7 @@ MIT License Copyright (c) 2025 Sventrain Hlandry3 Eggie574
 React (https://react.dev/)
 Konva (https://konvajs.org/)
 Node (https://nodejs.org/en)
+
+# Contact
+
+For issues or contributions, open an issue or pull request on GitHub.
