@@ -108,20 +108,20 @@ export default function Layout({ children }) {
       if (!image) return;
     
       const scale = Math.min(
-        canvasSize.width / image.width,
-        canvasSize.height / image.height
+        (canvasSize.width * 0.85) / image.width,
+        (canvasSize.height * 0.85) / image.height
       );
     
-      const x = (canvasSize.width - image.width * scale) / 2;
-      const y = (canvasSize.height - image.height * scale) / 2;
+      //const x = (canvasSize.width - image.width * scale) / 2;
+      //const y = (canvasSize.height - image.height * scale) / 2;
       const width = image.width * scale;
       const height = image.height * scale;
     
       const uri = stageRef.current.toDataURL({
-        x,
-        y,
-        width,
-        height,
+        x: 0,
+        y: 0,
+        width: width,
+        height: height,
         pixelRatio: 2 // optional, for higher quality
       });
     
