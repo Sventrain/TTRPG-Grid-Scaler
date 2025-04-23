@@ -24,8 +24,14 @@ cd .\ttrpg-grid\
 Install dependencies using npm install. 
     - This should install node_modules 
 Now build the program using npm run build. 
-When this finish type npm run dev to create a local host. 
-    -Example: http://localhost:5174/TTRPG-Grid-Scaler/
+
+Then
+
+Type npm run dev to create a local host. -Example: http://localhost:5174/TTRPG-Grid-Scaler/
+
+OR
+
+Type npm run deploy from Github pages. This allows the .io to work.
 
 Ctrl+Click or copy link and place into browser. 
 
