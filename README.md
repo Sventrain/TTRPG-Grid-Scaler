@@ -13,21 +13,21 @@ Export of final map.
 
 
 # Installation
-Install and IDE like Visual Studio
-Pull up terminal on IDE and git clone https://github.com/your-username/TTRPG-Grid-Scaler.git
-cd .\ttrpg-grid\
-Install dependencies using npm install. 
+Install an IDE like Visual Studio. You may need to install node.js depending on your IDE.
+Launch a command prompt terminal on your IDE and enter command "git clone https://github.com/your-username/TTRPG-Grid-Scaler.git"
+Once your repository is created and accessed, use command "cd .\ttrpg-grid\"
+Install dependencies using command "npm install". 
     - This should install node_modules 
-Now build the program using npm run build. 
+Now build the program using command "npm run build". 
 
 Then 
 
-Type npm run dev to create a local host. 
+Type command "npm run dev" to create a local host. This will create a link in your terminal. 
     -Example: http://localhost:5174/TTRPG-Grid-Scaler/
 
 OR
 
-Type npm run deploy from Github pages. This allows the .io to work. 
+Type "npm run deploy" from Github pages. This allows the .io to work. 
 
 Ctrl+Click or copy link and place into browser. 
 
